@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createGame,placeFood,turn,step,SIZE} from '../engine.js';
+const running=()=>({...createGame(()=>0),status:'running'});
+test('moves one cell without growing',()=>{const g=running();step(g);assert.deepEqual(g.snake[0],{x:9,y:10});assert.equal(g.snake.length,3);});
+test('food grows snake and increases score',()=>{const g=running();g.food={x:9,y:10};step(g,()=>0);assert.equal(g.score,10);assert.equal(g.snake.length,4);assert.ok(!g.snake.some(p=>p.x===g.food.x&&p.y===g.food.y));});
+test('rejects reversal and buffers two valid turns',()=>{const g=running();turn(g,'left');assert.deepEqual(g.queue,[]);turn(g,'up');turn(g,'left');turn(g,'down');assert.deepEqual(g.queue,['up','left']);step(g);assert.deepEqual(g.snake[0],{x:8,y:9});step(g);assert.deepEqual(g.snake[0],{x:7,y:9});});
+test('wall collision ends round',()=>{const g=running();g.snake=[{x:19,y:0}];step(g);assert.equal(g.status,'over');});
+test('self collision ends round',()=>{const g=running();g.snake=[{x:3,y:3},{x:3,y:4},{x:4,y:4},{x:4,y:3},{x:5,y:3}];step(g);assert.equal(g.status,'over');});
+test('moving into vacated tail cell is legal',()=>{const g=running();g.snake=[{x:3,y:3},{x:3,y:4},{x:4,y:4},{x:4,y:3}];step(g);assert.equal(g.status,'running');assert.deepEqual(g.snake[0],{x:4,y:3});});
+test('paused game does not move or accept turns',()=>{const g=running();g.status='paused';const before=structuredClone(g);turn(g,'up');step(g);assert.deepEqual(g,before);});
+test('full board wins without trying to spawn more food',()=>{const g=running();g.snake=[];for(let y=0;y<SIZE;y++)for(let x=0;x<SIZE;x++)if(x!==1||y!==0)g.snake.push({x,y});g.food={x:1,y:0};step(g);assert.equal(g.status,'won');assert.equal(g.snake.length,400);assert.equal(g.food,null);assert.equal(placeFood(g.snake),null);});

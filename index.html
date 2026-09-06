@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111813"><meta name="description" content="A fresh take on classic Snake. Eat, grow, and chase your personal best.">
+  <title>Snake — One more bite.</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111813'/%3E%3Cpath d='M16 44h27V30H22V17h26' fill='none' stroke='%23c4f36b' stroke-width='10'/%3E%3C/svg%3E"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header><a class="brand" href="./" aria-label="Snake home"><span class="brand-icon">⌁</span> snake<span class="dot">.</span></a><span class="edition">THE CLASSICS / 001</span></header>
+    <section class="intro"><div><p class="eyebrow">SMALL GAME. BIG APPETITE.</p><h1>One more bite<span>.</span></h1><p class="subtitle">Eat. Grow. Try not to eat yourself.</p></div><span class="badge"><i></i> NO DOWNLOADS. JUST PLAY.</span></section>
+    <div class="layout">
+      <section class="arcade" aria-label="Snake game">
+        <div class="scoreboard"><div><span class="label">SCORE</span><strong id="score">000</strong></div><div><span class="label">PERSONAL BEST</span><strong id="best">000</strong></div><button id="pause" class="icon-button" aria-label="Pause game" disabled>Ⅱ</button></div>
+        <div class="board-wrap" id="board-wrap"><canvas id="board" width="600" height="600" tabindex="0" aria-label="Snake playing field. Use arrow keys or WASD to steer."></canvas><div class="overlay" id="overlay"><span class="overlay-symbol" aria-hidden="true">⌁</span><h2 id="title">Got an appetite?</h2><p id="message">A little focus. A lot of snake.</p><button class="primary" id="play">Let’s play <span>↗</span></button><span class="start-hint">or press Space</span></div></div>
+        <div class="board-footer"><span><i></i> <span id="state">READY WHEN YOU ARE</span></span><span>20 × 20 GRID</span></div>
+        <div class="touch-controls" role="group" aria-label="Touch direction controls"><button data-direction="up" aria-label="Go up">↑</button><div><button data-direction="left" aria-label="Go left">←</button><button data-direction="down" aria-label="Go down">↓</button><button data-direction="right" aria-label="Go right">→</button></div></div>
+      </section>
+      <aside>
+        <section class="settings"><p class="eyebrow">SET YOUR PACE</p><div class="difficulties" role="group" aria-label="Difficulty"><button data-level="chill" aria-pressed="false">Chill</button><button data-level="classic" class="selected" aria-pressed="true">Classic</button><button data-level="fast" aria-pressed="false">Fast</button></div><p id="pace-note" class="small">The original rhythm. A little room to think.</p></section>
+        <section class="guide"><p class="eyebrow">THE SHORT VERSION</p><div class="instruction"><span class="food-demo"></span><div><h3>Follow your appetite</h3><p>Every bite adds 10 points.<br>And a little more you.</p></div></div><div class="instruction"><span class="wall-demo">↳</span><div><h3>Know your limits</h3><p>Walls and your own tail?<br>Definitely not on the menu.</p></div></div></section>
+        <section class="controls"><p class="eyebrow">YOU’RE IN CONTROL</p><p><kbd>↑</kbd> <kbd>←</kbd> <kbd>↓</kbd> <kbd>→</kbd><span>or WASD to steer</span></p><p><kbd>Space</kbd><span>start / pause</span></p><p><kbd>R</kbd><span>restart</span></p><p class="small">On your phone? Swipe the board or tap below.</p></section>
+
+        <p class="aside-note">Simple rules.<br><em>Endless “one more round.”</em></p>
+      </aside>
+    </div>
+    <footer><span>A LITTLE NOSTALGIA. A FRESH COAT OF PIXELS.</span><span>BUILT FOR THE FUN OF IT ↗</span></footer>
+    <p id="announcement" class="sr-only" aria-live="polite"></p>
+  </main><script type="module" src="game.js"></script>
+</body></html>
